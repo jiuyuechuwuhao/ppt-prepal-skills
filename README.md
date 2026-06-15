@@ -39,7 +39,7 @@
 
 > [实际案例：Disclosure Day 英语 Pre（21 页学术英文）](https://jiuyuechuwuhao.github.io/ufo-presentation/recitation_trainer.html)
 
-为保证排版优雅，以下为缩小版缩略图，**点击图片即可查看或下载高清全图**。
+**点击图片即可查看或下载高清全图。**
 
 <div align="center">
   <table>
