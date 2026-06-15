@@ -25,7 +25,7 @@
 - **TTS 语音带读**：微软 Edge TTS 引擎，免费，神经网络音质
 - **逐句高亮**：播放音频时，当前句子高亮 + 自动滚动
 - **全局语速控制**：0.5x ~ 2.0x，适应不同熟练度
-- **手机可用**：部署到 GitHub Pages 后，在任何设备上打开
+- **手机可用**：部署到 Vercel 后，在任何设备上打开
 - **零依赖部署**：纯静态 HTML，无后端，无数据库
 
 ## 📸 效果预览
@@ -76,7 +76,7 @@ python3 scripts/build_trainer.py \
     --output recitation_trainer.html \
     --compress
 
-# Step 6: （可选）部署到 GitHub Pages
+# Step 6: （可选）部署到 Vercel
 # 见 SKILL.md 中的详细步骤
 ```
 
@@ -125,7 +125,7 @@ recitation-trainer/
 | 图片处理 | python-pptx + Pillow | 一键导出一页不落 |
 | PPT 解析 | python-pptx | 提取文字内容 |
 | 前端 | 纯 HTML + CSS + JS | 零框架，零构建 |
-| 部署 | GitHub Pages | 免费，全球 CDN |
+| 部署 | Vercel | 免费，全球 CDN |
 
 ## 🤝 兼容的 AI 智能体
 

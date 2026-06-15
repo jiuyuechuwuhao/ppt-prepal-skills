@@ -451,11 +451,11 @@ Wait ~30 seconds for the build. The page is then accessible on any device.
 
 **Vercel SSO Protection** — Vercel free-tier static deployments default to "Vercel Authentication" (SSO login wall). This cannot be disabled via CLI. The user must:
 
-1. Go to https://vercel.com → their project → Settings → Deployment Protection
-2. Set "Vercel Authentication" to **Disabled**
-3. Redeploy
+1. 打开浏览器，进入 Vercel 项目后台：`https://vercel.com` → 选择对应项目 → 顶部导航栏点击 **Settings** → 左侧菜单点击 **Deployment Protection**
+2. 找到 **"Vercel Authentication"** 区块（描述为 "Visitors must be logged in to Vercel and a member of your team to view your deployments."），将下方的 **"Require Log In"** 开关点击关闭（变为灰/off 状态）
+3. 返回终端，重新执行 `vercel --prod --yes` 重部署
 
-OR: use the deployment URL directly (the long hash URL like `recitation-hanyafan-XXXXX.vercel.app`) which may not have the SSO wall.
+> ⚠️ **注意**：此操作仅需一次，同一项目后续部署不再受影响。实测确认长哈希 URL 同样受 SSO 保护，不可绕过。
 
 **Alternative: consider not deploying.** Step 5 delivers a working local HTML. Many users may not need public deployment. The AI agent should ask whether deployment is truly needed before attempting Step 6.
 
