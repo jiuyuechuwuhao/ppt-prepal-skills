@@ -5,6 +5,10 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Codex Ready](https://img.shields.io/badge/Codex-✓-blue)](https://github.com/jiuyuechuwuhao/ppt-prepal)
 [![Claude Code Ready](https://img.shields.io/badge/Claude%20Code-✓-orange)](https://github.com/jiuyuechuwuhao/ppt-prepal)
+[![Gemini CLI Ready](https://img.shields.io/badge/Gemini%20CLI-✓-purple)]()
+[![OpenCode Ready](https://img.shields.io/badge/OpenCode-✓-teal)]()
+[![Hermes Ready](https://img.shields.io/badge/Hermes-✓-gold)]()
+[![OpenClaw Ready](https://img.shields.io/badge/OpenClaw-✓-red)]()
 
 ---
 
@@ -129,16 +133,18 @@ ppt-prepal/
 
 ## 🤝 兼容的 AI 智能体
 
-- **Codex** (OpenAI)
-- **Claude Code** (Anthropic)
-- **Gemini CLI** (Google)
-- **OpenCode**
-- **Hermes**
-- 任何支持 Skill/Agent 规范的 AI 编程助手
+PPT PrePal 采用 Codex Skill 规范（`SKILL.md`），同时提供软链接（`CLAUDE.md` → `SKILL.md`、`GEMINI.md` → `SKILL.md`）以实现跨工具一键适配：
 
-## 📄 许可证
+| 智能体 | 安装方式 |
+|--------|---------|
+| **Codex** (OpenAI) | 原生 Skill 格式 — 直接放入 `~/.codex/skills/` |
+| **Claude Code** (Anthropic) | 软链接 `CLAUDE.md → SKILL.md` — 放入项目根目录 |
+| **Gemini CLI** (Google) | 软链接 `GEMINI.md → SKILL.md` — 放入项目根目录 |
+| **OpenCode** | 支持 AGENTS.md 规范 — 复制 SKILL.md 为 AGENTS.md |
+| **Hermes** | 支持 Skill 规范 — 直接使用 SKILL.md |
+| **OpenClaw** | 支持 AGENTS.md 规范 — 复制 SKILL.md 为 AGENTS.md |
 
-MIT License — 自由使用、修改、分发。
+> 任何支持 Markdown 格式 Skill/Agent 指令的 AI 编程助手均可使用。
 
 ---
 
