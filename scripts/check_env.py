@@ -20,6 +20,7 @@ import sys
 import os
 import platform
 import subprocess
+from subprocess import TimeoutExpired
 import shutil
 import json
 

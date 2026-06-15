@@ -128,7 +128,10 @@ def compress_images(slides_dir, max_width=1200):
                 new_path = img_path.with_suffix('.jpg')
                 img.save(new_path, 'JPEG', quality=85, optimize=True)
                 orig_size = img_path.stat().st_size / 1024
-                img_path.unlink()  # remove original
+                if new_path.stat().st_size > 100:
+                    img_path.unlink()  # remove original only if JPG is valid
+                else:
+                    print(f'  Warning: {new_path.name} too small, keeping original {img_path.name}')
                 new_size = new_path.stat().st_size / 1024
                 mapping[img_path.name] = new_path.name
                 print(f"  Compressed: {img_path.name} -> {new_path.name} "
