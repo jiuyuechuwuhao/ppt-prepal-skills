@@ -417,13 +417,38 @@ The AI agent should tell the user: **"The trainer is ready. Open `recitation_tra
 
 **⚠️ STOP HERE.** Do not proceed to Step 6 until the user confirms everything is correct.
 
-### Step 6: (Optional) Deploy to Vercel
+### Step 6: (Optional) Deploy for public access
 
 Only run this step if the user explicitly asks to deploy. Ask first:
 
-> "The trainer looks good locally. Would you like me to deploy it so you can access it on your phone? I'll use Vercel (free, no rate limits, one-command deploy)."
+> "The trainer looks good locally. Would you like me to deploy it so you can access it on your phone? Two free options: GitHub Pages (accessible in China, slightly more steps) or Vercel (one-command deploy, faster, but **blocked in China** — requires VPN)."
 
-If the user says yes:
+#### Option A · GitHub Pages (default, accessible in China)
+
+```bash
+# 1. Create a GitHub repo (public) and push the product folder
+cd recitation-trainer-product/
+git init
+git checkout -b main
+git add .
+git commit -m "Initial recitation trainer deploy"
+git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO.git
+git push -u origin main
+
+# 2. Enable GitHub Pages via gh CLI
+gh repo edit --pages-source-branch main --pages-source-path /
+gh repo view --web  # Open repo, Settings → Pages → Save
+
+# 3. Wait ~1 min for GitHub to build. Check status:
+gh api repos/YOUR_USERNAME/YOUR_REPO/pages --jq '.status'
+# Expected: "built"
+
+# 4. Public URL: https://YOUR_USERNAME.github.io/YOUR_REPO/recitation_trainer.html
+```
+
+> ⚠️ **Git Push Issues**: If `git add` fails with "pathspec did not match", use directory globs: `git add audio/ slides/ recitation_trainer.html` instead of `git add .`. This happens when filenames contain CJK characters.
+
+#### Option B · Vercel (one-command, blocked in China — VPN required)
 
 ```bash
 # Install Vercel CLI if needed
@@ -437,29 +462,31 @@ cd recitation-trainer-product/
 vercel --prod --yes
 ```
 
-**Public URL**: `https://PROJECT-NAME.vercel.app` (Vercel assigns a short alias automatically)
+**Public URL**: `https://PROJECT-NAME.vercel.app`
 
-**Why Vercel over Vercel:**
-- No RPC rate limit — deploys 27+ files in a single command
-- No Chinese filename issues — Vercel handles Unicode paths natively
-- Instant deploy, no batching, no git push retry loops
-- Same free tier, short URL, mobile-accessible
+### Deployment comparison
 
-Wait ~30 seconds for the build. The page is then accessible on any device.
+| | GitHub Pages | Vercel |
+|---|---|---|
+| **China access** | ✅ Yes | ❌ Blocked (needs VPN) |
+| **Deploy speed** | ~1 min | ~10 sec |
+| **File count limit** | None (batching needed) | None |
+| **One-time setup** | `gh repo create` + enable Pages | `npm install -g vercel` + `vercel login` |
+| **SSO protection** | None | **Must disable** (see below) |
 
 ### ⚠️ Known issues from live testing (Step 6: Deployment)
 
 **Vercel SSO Protection** — Vercel free-tier static deployments default to "Vercel Authentication" (SSO login wall). This cannot be disabled via CLI. The user must:
 
-1. 打开浏览器，进入 Vercel 项目后台：`https://vercel.com` → 选择对应项目 → 顶部导航栏点击 **Settings** → 左侧菜单点击 **Deployment Protection**
-2. 找到 **"Vercel Authentication"** 区块（描述为 "Visitors must be logged in to Vercel and a member of your team to view your deployments."），将下方的 **"Require Log In"** 开关点击关闭（变为灰/off 状态）
-3. 返回终端，重新执行 `vercel --prod --yes` 重部署
+1. 打开浏览器 → `https://vercel.com` → 选择对应项目 → Settings → Deployment Protection
+2. 找到 **"Vercel Authentication"** 区块（"Visitors must be logged in…"），将 **"Require Log In"** 开关关闭
+3. 终端重新 `vercel --prod --yes` 重部署
 
-> ⚠️ **注意**：此操作仅需一次，同一项目后续部署不再受影响。实测确认长哈希 URL 同样受 SSO 保护，不可绕过。
+> ⚠️ 此操作仅需一次。长哈希 URL 同样受 SSO 保护，不可绕过。
+
+**Vercel blocked in China** — Vercel 使用海外 CDN（AWS/Google Cloud），国内无 VPN 无法访问。中国用户应优先使用 GitHub Pages。
 
 **Alternative: consider not deploying.** Step 5 delivers a working local HTML. Many users may not need public deployment. The AI agent should ask whether deployment is truly needed before attempting Step 6.
-
----
 
 ### Known constraints (general pipeline)
 
@@ -488,5 +515,5 @@ These are hard constraints discovered during testing. The AI agent should be awa
 | No `pdftoppm` | `brew install poppler` on macOS |
 | Keynote export hangs | Close Keynote first: `killall Keynote` |
 | Phone can't see images | Images too large — run `--compress` |
-| Vercel 404 | Wait 2 min, check `gh api repos/.../pages --jq '.status'` |
+| Vercel blocked in China (can't open page) | Use GitHub Pages instead — see Step 6 Option A |
 | Audio won't play on mobile | Ensure MP3 files are < 1MB each |
