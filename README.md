@@ -37,15 +37,36 @@
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Click%20to%20view-blue)](https://jiuyuechuwuhao.github.io/ufo-presentation/recitation_trainer.html)
 
-> 实际案例：Disclosure Day 英语 Pre（21 页学术英文）
+> [实际案例：Disclosure Day 英语 Pre（21 页学术英文）](https://jiuyuechuwuhao.github.io/ufo-presentation/recitation_trainer.html)
 
-### 🖥️ 桌面端
+为保证排版优雅，以下为缩小版缩略图，**点击图片即可查看或下载高清全图**。
 
-![桌面端截图](assets/screenshots/desktop.png)
-
-### 📱 移动端
-
-![移动端截图](assets/screenshots/mobile.png)
+<div align="center">
+  <table>
+    <tr>
+      <td align="center"><b>🖥️ 桌面端</b></td>
+      <td align="center"><b>📱 移动端</b></td>
+      <td align="center"><b>🎧 朗读端</b></td>
+    </tr>
+    <tr>
+      <td align="center" valign="top">
+        <a href="assets/screenshots/desktop.png" target="_blank">
+          <img src="assets/screenshots/desktop.png" width="300" alt="桌面端截图" />
+        </a>
+      </td>
+      <td align="center" valign="top">
+        <a href="assets/screenshots/mobile.png" target="_blank">
+          <img src="assets/screenshots/mobile.png" width="180" alt="移动端截图" />
+        </a>
+      </td>
+      <td align="center" valign="top">
+        <a href="assets/screenshots/reader.png" target="_blank">
+          <img src="assets/screenshots/reader.png" width="300" alt="朗读端截图" />
+        </a>
+      </td>
+    </tr>
+  </table>
+</div>
 ## 🛠️ 快速开始
 
 ### 安装
