@@ -57,8 +57,16 @@ def export_with_keynote(pptx_path, output_dir):
     )
     
     print("  Exporting via Keynote (~10 seconds)...")
-    result = subprocess.run(["osascript", "-e", script],
-                          capture_output=True, text=True, timeout=120)
+    try:
+        result = subprocess.run(["osascript", "-e", script],
+                              capture_output=True, text=True, timeout=120)
+    except subprocess.TimeoutExpired:
+        print("  Keynote export timed out after 120s. The PPTX may be too large.")
+        subprocess.run(["osascript", "-e", 'tell application "Keynote" to quit'], capture_output=True)
+        return False
+    except FileNotFoundError:
+        print("  osascript not found. Are you on macOS?")
+        return False
     
     output = result.stdout.strip()
     print(f"  Keynote: {output[:100]}")

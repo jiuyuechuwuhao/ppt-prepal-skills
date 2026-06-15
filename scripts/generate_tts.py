@@ -71,11 +71,13 @@ def parse_full_texts(script_path):
         if ft:
             full_text = re.sub(r'\n> ?', ' ', ft.group(1)).replace('\n', ' ').strip()
 
-        if full_text:
+        if full_text and len(full_text.strip()) > 5:
             # Insert SSML pauses between sentences for natural rhythm
             if "{{PAUSE}}" not in full_text:
                 full_text = insert_pauses(full_text)
             slides.append((slide_num, full_text))
+        elif full_text:
+            print(f"  Warning: Slide {slide_num:02d} text too short ({len(full_text)} chars), skipping")
 
     return slides
 
@@ -111,8 +113,17 @@ async def generate_slide_audio(slide_num, text, output_dir, voice, rate):
     
     print(f"  Slide {slide_num:02d} [{voice_short}]... ({len(text)} chars)", end="", flush=True)
     
-    communicate = Communicate(text=text, voice=voice, rate=rate)
-    await communicate.save(output_path)
+    try:
+        communicate = Communicate(text=text, voice=voice, rate=rate)
+        await communicate.save(output_path)
+    except Exception as e:
+        error_msg = str(e)
+        if "Connection" in error_msg or "connect" in error_msg.lower():
+            print(f"\n  Network error: Cannot reach Microsoft Edge TTS service.")
+            print("  Please check your internet connection and try again.")
+        else:
+            print(f"\n  TTS error on Slide {slide_num:02d}: {error_msg}")
+        raise
     
     size_kb = os.path.getsize(output_path) / 1024
     print(f" → {size_kb:.0f} KB")

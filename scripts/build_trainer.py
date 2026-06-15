@@ -137,12 +137,22 @@ def compress_images(slides_dir, max_width=1200):
 def detect_image_ext(slides_dir):
     """Detect the image file extension used in the slides directory."""
     dir_path = Path(slides_dir)
-    if list(dir_path.glob('Slide01.jpg')):
+    if not dir_path.exists():
+        print(f"  Warning: Slides directory not found: {slides_dir}")
+        print(f"  HTML will be generated but slide images won't display.")
         return 'jpg'
-    if list(dir_path.glob('Slide01.png')):
+    if list(dir_path.glob('Slide01.jpg')) or list(dir_path.glob('Slide01.JPG')):
+        return 'jpg'
+    if list(dir_path.glob('Slide01.png')) or list(dir_path.glob('Slide01.PNG')):
         return 'png'
-    if list(dir_path.glob('Slide01.PNG')):
-        return 'png'
+    # Check any slide file
+    any_slides = list(dir_path.glob('Slide*.*'))
+    if any_slides:
+        ext = any_slides[0].suffix.lower().lstrip('.')
+        print(f"  Detected image format: .{ext}")
+        return ext
+    print(f"  Warning: No slide images found in {slides_dir}")
+    print(f"  HTML will be generated but slide previews will show fallback text.")
     return 'jpg'  # default
 
 

@@ -14,7 +14,15 @@ from pptx import Presentation
 
 
 def extract_text(pptx_path):
-    prs = Presentation(pptx_path)
+    if not os.path.exists(pptx_path):
+        print(f"Error: File not found: {pptx_path}")
+        sys.exit(1)
+    try:
+        prs = Presentation(pptx_path)
+    except Exception as e:
+        print(f"Error: Could not open PPTX file: {e}")
+        print("Make sure the file is a valid .pptx format.")
+        sys.exit(1)
     for i, slide in enumerate(prs.slides):
         print(f"\n{'='*60}")
         print(f"## Slide {i+1} — (AI: fill in title based on content below)")
