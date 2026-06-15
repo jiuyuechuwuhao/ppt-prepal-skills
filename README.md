@@ -55,13 +55,13 @@
         </a>
       </td>
       <td align="center" valign="top">
-        <a href="assets/screenshots/mobile.png" target="_blank">
-          <img src="assets/screenshots/mobile.png" width="180" alt="移动端截图" />
+        <a href="assets/screenshots/mobile_v2.png" target="_blank">
+          <img src="assets/screenshots/mobile_v2.png" width="180" alt="移动端截图" />
         </a>
       </td>
       <td align="center" valign="top">
-        <a href="assets/screenshots/reader.png" target="_blank">
-          <img src="assets/screenshots/reader.png" width="300" alt="朗读端截图" />
+        <a href="assets/screenshots/reader_v2.png" target="_blank">
+          <img src="assets/screenshots/reader_v2.png" width="300" alt="朗读端截图" />
         </a>
       </td>
     </tr>
